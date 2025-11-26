@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DIY Crafts Dashboard</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #74ebd5, #9face6);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .container {
+      background: #fff;
+      padding: 25px;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+      width: 100%;
+      max-width: 400px;
+    }
+    h2 { text-align: center; margin-bottom: 20px; color: #333; }
+    .form-group { margin-bottom: 15px; }
+    label { display: block; margin-bottom: 5px; color: #555; }
+    input {
+      width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 5px;
+    }
+    button {
+      width: 100%; padding: 12px; background: #6c63ff; color: #fff;
+      border: none; border-radius: 5px; font-size: 16px; cursor: pointer;
+    }
+    button:hover { background: #574b90; }
+    #message { margin-top: 15px; text-align: center; font-weight: bold; }
+    .toggle-link { text-align: center; margin-top: 10px; cursor: pointer; color: #6c63ff; }
+    /* Dashboard */
+    .dashboard {
+      display: none;
+      max-width: 1000px;
+      margin: auto;
+      padding: 20px;
+    }
+    .dashboard h2 { text-align: center; margin-bottom: 20px; }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+    }
+    .card {
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+      overflow: hidden;
+      text-align: center;
+    }
+    .card img {
+      width: 100%;
+      height: 150px;
+      object-fit: cover;
+    }
+    .card h3 { padding: 10px; color: #333; }
+  </style>
+</head>
+<body>
+  <!-- Auth Container -->
+  <div class="container" id="authContainer">
+    <form id="registerForm">
+      <h2>Register</h2>
+      <div class="form-group">
+        <label>Name</label>
+        <input type="text" id="regName" required>
+      </div>
+      <div class="form-group">
+        <label>Email</label>
+        <input type="email" id="regEmail" required>
+      </div>
+      <div class="form-group">
+        <label>Password</label>
+        <input type="password" id="regPassword" required>
+      </div>
+      <div class="form-group">
+        <label>Confirm Password</label>
+        <input type="password" id="regConfirmPassword" required>
+      </div>
+      <button type="submit">Register</button>
+      <p id="message"></p>
+      <div class="toggle-link" onclick="showLogin()">Already have an account? Login</div>
+    </form>
+
+    <form id="loginForm" style="display:none;">
+      <h2>Login</h2>
+      <div class="form-group">
+        <label>Email</label>
+        <input type="email" id="loginEmail" required>
+      </div>
+      <div class="form-group">
+        <label>Password</label>
+        <input type="password" id="loginPassword" required>
+      </div>
+      <button type="submit">Login</button>
+      <p id="loginMessage"></p>
+      <div class="toggle-link" onclick="showRegister()">Don't have an account? Register</div>
+    </form>
+  </div>
+
+  <!-- Dashboard -->
+  <div class="dashboard" id="dashboard">
+    <h2>DIY Crafts Dashboard</h2>
+    <div class="grid">
+      <div class="card">
+        <img src="candle.jpeg" alt="Candles">
+        <h3>Candles</h3><br>
+        <p>A candle is a source of light and scent, consisting of a wick embedded in a flammable solid fuel like wax, which is melted and burned through a self-sustaining cycle of capillary action</p>
+      </div>
+      <div class="card">
+        <img src="paper flower.jpeg" alt="Paper Flowers">
+        <h3>Paper Flowers</h3><br>
+        <p>Paper flowers can refer to the paperflower plant (Bougainvillea) or handcrafted flowers made from paper</p>
+      </div>
+      <div class="card">
+        <img src="fabric keychain.jpeg" alt="Fabric Keychains">
+        <h3>Fabric Keychains</h3><br>
+        <p>Fabric keychains are versatile, lightweight accessories used for key organization, personal style, and as practical, hands-free solutions. They are often handmade and can be easily customized.</p>
+      </div>
+      <div class="card">
+        <img src="painted rocks.jpeg" alt="Painted Rocks">
+        <h3>Painted Rocks</h3><br>
+        <p>Painted rocks are rocks that are painted with designs, images, or positive messages, and can be a fun hobby for decorating, spreading kindness, or even for historic rock art</p>
+      </div>
+      <div class="card">
+        <img src="wreaths.jpeg" alt="Wreaths">
+        <h3>Wreaths</h3><br>
+        <p>Wreaths are ring-shaped assortments of various materials, serving as symbols and decorations across many cultures and seasons. </p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function showLogin() {
+      document.getElementById("registerForm").style.display = "none";
+      document.getElementById("loginForm").style.display = "block";
+    }
+    function showRegister() {
+      document.getElementById("loginForm").style.display = "none";
+      document.getElementById("registerForm").style.display = "block";
+    }
+
+    document.getElementById("registerForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+      const name = document.getElementById("regName").value.trim();
+      const email = document.getElementById("regEmail").value.trim();
+      const password = document.getElementById("regPassword").value;
+      const confirmPassword = document.getElementById("regConfirmPassword").value;
+      const message = document.getElementById("message");
+
+      if (password !== confirmPassword) {
+        message.textContent = "Passwords do not match!";
+        message.style.color = "red";
+        return;
+      }
+      message.textContent = "Registration successful! Please login.";
+      message.style.color = "green";
+      showLogin();
+    });
+
+    document.getElementById("loginForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+      const email = document.getElementById("loginEmail").value.trim();
+      const password = document.getElementById("loginPassword").value;
+      const loginMessage = document.getElementById("loginMessage");
+
+      if (!email || !password) {
+        loginMessage.textContent = "Both fields are required!";
+        loginMessage.style.color = "red";
+        return;
+      }
+
+      loginMessage.textContent = "Login successful!";
+      loginMessage.style.color = "green";
+
+      // Show dashboard
+      document.getElementById("authContainer").style.display = "none";
+      document.getElementById("dashboard").style.display = "block";
+    });
+  </script>
+</body>
+</html>
