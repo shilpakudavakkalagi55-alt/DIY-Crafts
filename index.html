@@ -1,9 +1,9 @@
-<!DOCTYPE html>
+  <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>DIY Crafts Dashboard</title>
+  <title>DIY Crafts App</title>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
@@ -33,7 +33,7 @@
       border: none; border-radius: 5px; font-size: 16px; cursor: pointer;
     }
     button:hover { background: #574b90; }
-    #message { margin-top: 15px; text-align: center; font-weight: bold; }
+    #message, #loginMessage { margin-top: 15px; text-align: center; font-weight: bold; }
     .toggle-link { text-align: center; margin-top: 10px; cursor: pointer; color: #6c63ff; }
     /* Dashboard */
     .dashboard {
@@ -61,11 +61,25 @@
       object-fit: cover;
     }
     .card h3 { padding: 10px; color: #333; }
+    .logout-btn {
+      margin-top: 20px;
+      display: block;
+      padding: 12px;
+      background: #ff4b5c;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      font-size: 16px;
+      cursor: pointer;
+      text-align: center;
+    }
+    .logout-btn:hover { background: #c0392b; }
   </style>
 </head>
 <body>
   <!-- Auth Container -->
   <div class="container" id="authContainer">
+    <!-- Register -->
     <form id="registerForm">
       <h2>Register</h2>
       <div class="form-group">
@@ -89,6 +103,7 @@
       <div class="toggle-link" onclick="showLogin()">Already have an account? Login</div>
     </form>
 
+    <!-- Login -->
     <form id="loginForm" style="display:none;">
       <h2>Login</h2>
       <div class="form-group">
@@ -112,29 +127,30 @@
       <div class="card">
         <img src="candle.jpeg" alt="Candles">
         <h3>Candles</h3><br>
-        <p>A candle is a source of light and scent, consisting of a wick embedded in a flammable solid fuel like wax, which is melted and burned through a self-sustaining cycle of capillary action</p>
+        <p>A candle is an ignitable wick embedded in wax or another flammable substance that provides light.</p>
       </div>
       <div class="card">
         <img src="paper flower.jpeg" alt="Paper Flowers">
         <h3>Paper Flowers</h3><br>
-        <p>Paper flowers can refer to the paperflower plant (Bougainvillea) or handcrafted flowers made from paper</p>
+        <p>Paper flowers are versatile, handcrafted creations made from various types of paper that offer permanent, delicate, and vibrant decoration without the need for water or sunlight</p>
       </div>
       <div class="card">
         <img src="fabric keychain.jpeg" alt="Fabric Keychains">
         <h3>Fabric Keychains</h3><br>
-        <p>Fabric keychains are versatile, lightweight accessories used for key organization, personal style, and as practical, hands-free solutions. They are often handmade and can be easily customized.</p>
+        <p>Fabric keychains are versatile, lightweight accessories that serve both functional and aesthetic purposes</p>
       </div>
       <div class="card">
         <img src="painted rocks.jpeg" alt="Painted Rocks">
         <h3>Painted Rocks</h3><br>
-        <p>Painted rocks are rocks that are painted with designs, images, or positive messages, and can be a fun hobby for decorating, spreading kindness, or even for historic rock art</p>
+        <p>Painted rocks can be a fun hobby, a form of ancient art, or a community activity that spreads kindness</p>
       </div>
       <div class="card">
         <img src="wreaths.jpeg" alt="Wreaths">
         <h3>Wreaths</h3><br>
-        <p>Wreaths are ring-shaped assortments of various materials, serving as symbols and decorations across many cultures and seasons. </p>
+        <p>A wreath is a decorative assortment of flowers, leaves, fruits, twigs, or other materials constructed to form a ring shape.</p>
       </div>
     </div>
+    <button class="logout-btn" onclick="logout()">Logout</button>
   </div>
 
   <script>
@@ -184,6 +200,12 @@
       document.getElementById("authContainer").style.display = "none";
       document.getElementById("dashboard").style.display = "block";
     });
+
+    function logout() {
+      document.getElementById("dashboard").style.display = "none";
+      document.getElementById("authContainer").style.display = "block";
+      showLogin(); // return to login screen
+    }
   </script>
 </body>
 </html>
